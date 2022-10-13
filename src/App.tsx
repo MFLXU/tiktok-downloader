@@ -7,6 +7,7 @@ function App() {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [postDesc, setPostDesc] = useState("");
+  const [errormsg, setErrorMsg] = useState("");
   const downloadLinkHandler = () => {
     const options = {
       method: "GET",
@@ -37,9 +38,20 @@ function App() {
   };
   return (
     <div>
+      <div className="navbar bg-primary">
+        <div className="container">
+          <a className="btn btn-ghost normal-case text-white text-xl">
+            Tiktok Downloader
+          </a>
+        </div>
+      </div>
       <div className="container">
-        <div className="mt-20">
-          <div className="form-control">
+        <div className="mt-20 flex items-center justify-center flex-col">
+          <h1 className="text-6xl font-extrabold">TikTok Downloader</h1>
+          <p className="text-2xl mt-2">
+            Start by pasting in the TikTok Url down below.
+          </p>
+          <div className="my-8 form-control">
             <div className="input-group">
               <input
                 onChange={(e) => {
@@ -74,23 +86,22 @@ function App() {
           </div>
 
           {downloadLink ? (
-            <div>
-              <div className="card w-96 bg-base-100 shadow-xl">
-                <div className="card-body">
-                  <h2 className="card-title">{name}</h2>
-                  <p>{username}</p>
-                  <p>{postDesc}</p>
-                  <div className="card-actions justify-end">
-                    <a href={downloadLink} className="btn btn-primary">
-                      Download
-                    </a>
-                  </div>
+            <div className="card w-96 bg-base-100 shadow-xl border">
+              <div className="p-4 flex items-center justify-center flex-col">
+                <div className="flex items-center justify-center mb-8 flex-col">
+                  <p className="text-xl link-primary">Download video of</p>
+                  <h2 className="card-title text-3xl font-extrabold">{name}</h2>
+                  <p className="text-gray-400 font-bold">@{username}</p>
+                </div>
+
+                <div className="card-actions justify-center ">
+                  <a href={downloadLink} className="btn btn-wide btn-primary">
+                    Download
+                  </a>
                 </div>
               </div>
             </div>
-          ) : (
-            <p>loading</p>
-          )}
+          ) : null}
         </div>
       </div>
     </div>

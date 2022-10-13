@@ -11,3 +11,9 @@
     max-width: 1000px;
     margin: auto;
 }
+
+@layer base {
+    .container{
+        @apply px-4
+    }
+}
