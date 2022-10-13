@@ -38,29 +38,55 @@ function App() {
   return (
     <div>
       <div className="container">
-        <div>
-          <p>Enter Tiktok Link</p>
-          <input
-            type="text"
-            onChange={(e) => {
-              tiktokLinkHandler(e);
-            }}
-          />
-          <button
-            onClick={() => {
-              downloadLinkHandler();
-            }}
-          >
-            search
-          </button>
+        <div className="mt-20">
+          <div className="form-control">
+            <div className="input-group">
+              <input
+                onChange={(e) => {
+                  tiktokLinkHandler(e);
+                }}
+                type="text"
+                placeholder="Search for tiktok…"
+                className="input input-bordered"
+              />
+              <button
+                onClick={() => {
+                  downloadLinkHandler();
+                }}
+                className="btn btn-square"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
           {downloadLink ? (
             <div>
-              <a target="_blank" href={downloadLink}>
-                download
-              </a>
-              <p>{name}</p>
-              <p>{username}</p>
-              <p>{postDesc}</p>
+              <div className="card w-96 bg-base-100 shadow-xl">
+                <div className="card-body">
+                  <h2 className="card-title">{name}</h2>
+                  <p>{username}</p>
+                  <p>{postDesc}</p>
+                  <div className="card-actions justify-end">
+                    <a href={downloadLink} className="btn btn-primary">
+                      Download
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           ) : (
             <p>loading</p>
