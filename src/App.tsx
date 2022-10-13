@@ -6,8 +6,7 @@ function App() {
   const [tiktokLink, setTiktokLink] = useState("");
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
-  const [profileImage, setProfileImage] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
+  const [postDesc, setPostDesc] = useState("");
   const downloadLinkHandler = () => {
     const options = {
       method: "GET",
@@ -26,14 +25,9 @@ function App() {
         setDownloadLink(response.data.result.video.url_list[0]);
         setUsername(response.data.result.aweme_detail.author.unique_id);
         setName(response.data.result.aweme_detail.author.nickname);
-        setProfileImage(
-          response.data.result.aweme_detail.author.avatar_large.url_list[0]
-        );
-        setThumbnail(response.data.result.aweme_detail.video.cover.url_list[0]);
+        setPostDesc(response.data.result.aweme_detail.desc);
       })
-      .then(() => {
-        console.log(name, username, profileImage, thumbnail);
-      })
+
       .catch(function (error) {
         console.error(error);
       });
@@ -43,32 +37,36 @@ function App() {
   };
   return (
     <div>
-      <input
-        type="text"
-        onChange={(e) => {
-          tiktokLinkHandler(e);
-        }}
-      />
-      <button
-        onClick={() => {
-          downloadLinkHandler();
-        }}
-      >
-        search
-      </button>
-      {downloadLink ? (
+      <div className="container">
         <div>
-          <a target="_blank" href={downloadLink}>
-            download
-          </a>
-          <p>{name}</p>
-          <p>{username}</p>
-          <img src={profileImage || ""} alt="" />
-          <img src={thumbnail || ""} alt="" />
+          <p>Enter Tiktok Link</p>
+          <input
+            type="text"
+            onChange={(e) => {
+              tiktokLinkHandler(e);
+            }}
+          />
+          <button
+            onClick={() => {
+              downloadLinkHandler();
+            }}
+          >
+            search
+          </button>
+          {downloadLink ? (
+            <div>
+              <a target="_blank" href={downloadLink}>
+                download
+              </a>
+              <p>{name}</p>
+              <p>{username}</p>
+              <p>{postDesc}</p>
+            </div>
+          ) : (
+            <p>loading</p>
+          )}
         </div>
-      ) : (
-        <p>loading</p>
-      )}
+      </div>
     </div>
   );
 }
